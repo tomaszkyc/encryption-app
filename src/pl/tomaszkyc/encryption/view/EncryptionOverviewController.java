@@ -99,6 +99,15 @@ public class EncryptionOverviewController {
 	private void handleChooseFile() {
 
 		FileChooser fileChooser = new FileChooser();
+		
+		//if decryption radio button is selected
+		if ( decryptRadioButton.isSelected() ){
+			
+			//add filter to encryption files
+	        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("ENCRYPTION files (*.encryption)", "*.encryption");
+	        fileChooser.getExtensionFilters().add(extFilter);
+			
+		}
 
 
 		

@@ -5,8 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import pl.tomaszkyc.encryption.model.EncryptionInfo;
 import pl.tomaszkyc.encryption.view.EncryptionOverviewController;
+import pl.tomaszkyc.encryption.view.SaveFileOverviewController;
 
 public class MainApp extends Application {
 
@@ -62,6 +65,41 @@ public class MainApp extends Application {
 		}
 		
 	}
+	
+	public void showSaveFileWindow(EncryptionInfo encryptionInfo){
+		
+		try{
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/SaveFileOverview.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+			
+			Stage saveFileStage = new Stage();
+			saveFileStage.setTitle("Save file...");
+			saveFileStage.initModality(Modality.WINDOW_MODAL);
+			saveFileStage.initOwner(primaryStage);
+			Scene scene = new Scene(page);
+			saveFileStage.setScene(scene);
+			
+			SaveFileOverviewController controller = loader.getController();
+			controller.setDialogStage(saveFileStage);
+			controller.setEncryptionInfo(encryptionInfo);
+			
+			saveFileStage.showAndWait();
+			
+		}
+		catch(Exception e){
+			System.out.println("Error when showing save file window: " + e.getMessage());
+			e.printStackTrace();
+		}
+		
+
+		
+		
+		
+		
+	}
+	
+	
 	
 	public static void main(String[] args){
 		launch(args);
