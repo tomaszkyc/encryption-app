@@ -15,6 +15,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.stage.FileChooser;
 import pl.tomaszkyc.encryption.MainApp;
+import pl.tomaszkyc.encryption.model.EncryptionInfo;
 import pl.tomaszkyc.encryption.util.ClipboardUtil;
 import pl.tomaszkyc.encryption.util.CryptoUtil;
 import pl.tomaszkyc.encryption.util.PasswordUtil;
@@ -53,12 +54,7 @@ public class EncryptionOverviewController {
 		
 		return ENCRYPTION_FILE_NAME_PATTERN.replaceAll("@ACTUAL_FILE_NAME@", filename);
 	}
-	
-	private static String convertFileNameToDecryption(final String filename){
-		
-		return filename.substring( 0 , filename.indexOf(".encrypted"));
-		
-	}
+
 	
 
 	public EncryptionOverviewController() {
@@ -225,6 +221,14 @@ public class EncryptionOverviewController {
 	@FXML
 	public void handleRunButton() {
 		
+		
+		//for test purposes only
+		
+		
+		
+		
+		
+
 		//password
 		String password = passwordPasswordField.getText();
 		
@@ -251,6 +255,8 @@ public class EncryptionOverviewController {
 			return;
 		}
 		
+		
+		
 		//check if File path label has value "No file spelected"
 		if (filePathLabel.getText().equals("No file selected...")){
 			
@@ -265,6 +271,47 @@ public class EncryptionOverviewController {
 		}
 		
 		
+		
+		
+		//if encryption is selected
+		if ( encryptRadioButton.isSelected() ){
+
+			
+			//generate encryption file path
+			String encryptionFilePath = convertFileNameToEncryption(filePath);
+			
+			
+			//create an object
+			EncryptionInfo encryptionInfo = new EncryptionInfo();
+			encryptionInfo.setPassword(password);
+			encryptionInfo.setEncryptingFile(encryptRadioButton.isSelected());
+			encryptionInfo.setInputFilePath(filePath);
+			
+			mainApp.showSaveFileWindow(encryptionInfo);
+			
+			
+			
+			
+		}
+		//if decryption is selected
+		else{
+			
+			//generate encryption file path
+			//String encryptionFilePath = convertFileNameToDecryption(filePath);
+			
+			
+			//create an object
+			EncryptionInfo encryptionInfo = new EncryptionInfo();
+			encryptionInfo.setPassword(password);
+			encryptionInfo.setEncryptingFile(encryptRadioButton.isSelected());
+			encryptionInfo.setInputFilePath(filePath);
+			
+			mainApp.showSaveFileWindow(encryptionInfo);
+			
+		}
+		
+		
+		/*
 		//if encryption is selected
 		if ( encryptRadioButton.isSelected() ){
 			
@@ -322,7 +369,7 @@ public class EncryptionOverviewController {
 		
 		
 		
-		
+		*/
 		
 	}
 	

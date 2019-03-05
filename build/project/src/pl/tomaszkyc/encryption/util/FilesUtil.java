@@ -9,12 +9,12 @@ public class FilesUtil {
 		boolean isFileExist = true;
 		
 		if (filePath == null || filePath.isEmpty()){
-			return false;
+			return true;
 		}
 		
 		File file = new File(filePath);
 		
-		if (!file.exists()){
+		if (!file.exists() && !file.isDirectory()){
 			return false;
 		}		
 		

@@ -1,45 +1,69 @@
 package pl.tomaszkyc.encryption.model;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
 public class EncryptionInfo {
-	
-	private final StringProperty password;
-	private final StringProperty filePath;
-	private final StringProperty chooseOption;
-	public String getPassword() {
-		return password.get();
-	}
-	public String getFilePath() {
-		return filePath.get();
-	}
-	public String getChooseOption() {
-		return chooseOption.get();
-	}
-	
-	public void setPassword(String password){
-		this.password.set(password);
-	}
-	
-	public void setFilePath(String filePath){
-		this.filePath.set(filePath);
-	}
-	
-	public void setChooseOption(String chooseOption){
-		this.chooseOption.set(chooseOption);
-	}
-	
-	public EncryptionInfo(String password, String filePath, String chooseOption){
-		this.password = new SimpleStringProperty(password);
-		this.filePath = new SimpleStringProperty(filePath);
-		this.chooseOption = new SimpleStringProperty(chooseOption);
-		
-		
+
+	private String password;
+
+	private String inputFilePath;
+
+	private String outputFilePath;
+
+	private boolean isEncryptingFile;
+
+	public EncryptionInfo() {
+
 	}
 
-	public EncryptionInfo(){
-		this("", "", "");
+	public EncryptionInfo(String password, String inputFilePath, String outputFilePath, boolean isEncryptingFile) {
+		super();
+		this.password = password;
+		this.inputFilePath = inputFilePath;
+		this.outputFilePath = outputFilePath;
+		this.isEncryptingFile = isEncryptingFile;
+	}
+
+	public String getInputFilePath() {
+		return inputFilePath;
+	}
+
+	public String getOutputFilePath() {
+		return outputFilePath;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * method to check if file is now decrrypting We don't need to use another
+	 * boolean field in class because this can be done with opposite to field
+	 * isEncryptingFile
+	 * 
+	 * @return TRUE if file is decrypting FALSE if file is not decrypting ->
+	 *         encrypting
+	 */
+	public boolean isDecryptingFile() {
+		return !isEncryptingFile();
+	}
+
+	public boolean isEncryptingFile() {
+		return isEncryptingFile;
+	}
+
+	public void setEncryptingFile(boolean isEncryptingFile) {
+		this.isEncryptingFile = isEncryptingFile;
+	}
+
+	public void setInputFilePath(String inputFilePath) {
+		this.inputFilePath = inputFilePath;
+	}
+
+	public void setOutputFilePath(String outputFilePath) {
+		this.outputFilePath = outputFilePath;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

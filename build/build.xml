@@ -85,13 +85,13 @@
 		<fx:resources id="appRes">
 			<fx:fileset dir="dist" includes="EncryptionApp.jar"/>
 			<fx:fileset dir="dist" includes="libs/*"/>
-		    <fx:fileset dir="dist" includes="resources/**"/>
+		    <fx:fileset dir="dist" includes="resources/**"/>			
 		</fx:resources>
 	
 		<fx:application id="fxApplication"
 			name="Encryption App"
 			mainClass="pl.tomaszkyc.encryption.MainApp"
-		    version="1.0"
+			version="1.1"
 		/>
 	
 		<mkdir dir="build/classes/META-INF" />
@@ -107,7 +107,7 @@
 			<manifest>
 				<attribute name="Implementation-Vendor" value="Tomasz Kyc"/>
 				<attribute name="Implementation-Title" value="Encryption App"/>
-				<attribute name="Implementation-Version" value="1.0"/>
+				<attribute name="Implementation-Version" value="1.1"/>
 				<attribute name="JavaFX-Feature-Proxy" value="None"/>
 			</manifest>
 		</fx:jar>
