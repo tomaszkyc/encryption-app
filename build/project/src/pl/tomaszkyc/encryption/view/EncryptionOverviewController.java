@@ -55,6 +55,22 @@ public class EncryptionOverviewController {
 		return ENCRYPTION_FILE_NAME_PATTERN.replaceAll("@ACTUAL_FILE_NAME@", filename);
 	}
 
+    @FXML
+    private void handleAbout() {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("About");
+        alert.setHeaderText("About");
+        alert.setContentText("Author: Tomasz Kyc\nTo check this code go to site: https://github.com/tomaszkyc/encryption-app");
+        alert.showAndWait();
+    }
+
+    /**
+     * Closes the application.
+     */
+    @FXML
+    private void handleExit() {
+        System.exit(0);
+    }
 	
 
 	public EncryptionOverviewController() {
