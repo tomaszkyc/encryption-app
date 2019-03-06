@@ -38,7 +38,7 @@
       <Label fx:id="filePathLabel" layoutX="94.0" layoutY="192.0" text="No file selected..." />
       <Label layoutX="27.0" layoutY="295.0" text="Password length:" />
       <Label fx:id="passwordLengthLabel" layoutX="135.0" layoutY="295.0" text="0" />
-      <MenuBar layoutY="2.0" prefWidth="500.0">
+      <MenuBar layoutY="2.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="500.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
