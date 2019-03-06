@@ -13,11 +13,12 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
+import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import pl.tomaszkyc.encryption.MainApp;
 import pl.tomaszkyc.encryption.model.EncryptionInfo;
 import pl.tomaszkyc.encryption.util.ClipboardUtil;
-import pl.tomaszkyc.encryption.util.CryptoUtil;
 import pl.tomaszkyc.encryption.util.PasswordUtil;
 
 public class EncryptionOverviewController {
@@ -36,42 +37,48 @@ public class EncryptionOverviewController {
 
 	@FXML
 	private PasswordField passwordPasswordField;
-	
+
 	@FXML
 	private Button runButton;
 
 	private File file;
 
 	private MainApp mainApp;
-	
+
 	private static final String ENCRYPTION_FILE_NAME_PATTERN = "@ACTUAL_FILE_NAME@.encrypted";
-	
-	private static final String DECRYPTION_FILE_NAME_PATTERN = "@ACTUAL_FILE_NAME@"; 
-	
+
+	private static final String DECRYPTION_FILE_NAME_PATTERN = "@ACTUAL_FILE_NAME@";
+
 	private static final String RUN_BUTTON_LABEL = "Run @ACTION@";
-	
-	private static String convertFileNameToEncryption(final String filename){
-		
+
+	private static String convertFileNameToEncryption(final String filename) {
+
 		return ENCRYPTION_FILE_NAME_PATTERN.replaceAll("@ACTUAL_FILE_NAME@", filename);
 	}
 
-    @FXML
-    private void handleAbout() {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("About");
-        alert.setHeaderText("About");
-        alert.setContentText("Author: Tomasz Kyc\nTo check this code go to site: https://github.com/tomaszkyc/encryption-app");
-        alert.showAndWait();
-    }
+	@FXML
+	private void handleAbout() {
+		Alert alert = new Alert(AlertType.INFORMATION);
 
-    /**
-     * Closes the application.
-     */
-    @FXML
-    private void handleExit() {
-        System.exit(0);
-    }
-	
+		// add icon
+		Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+		stage.getIcons().add(new Image("file:resources/images/app_icon3.png"));
+
+		alert.setTitle("About");
+		alert.setHeaderText("About");
+		alert.setContentText(
+				"Author: Tomasz Kyc\nTo check this code go to site: https://github.com/tomaszkyc/encryption-app");
+		alert.showAndWait();
+
+	}
+
+	/**
+	 * Closes the application.
+	 */
+	@FXML
+	private void handleExit() {
+		System.exit(0);
+	}
 
 	public EncryptionOverviewController() {
 
@@ -96,14 +103,14 @@ public class EncryptionOverviewController {
 			}
 
 		});
-		
-		//set encryption button as selected
-		encryptRadioButton.setSelected( true );
-		
-		//add label to run button
-		//change run button label
+
+		// set encryption button as selected
+		encryptRadioButton.setSelected(true);
+
+		// add label to run button
+		// change run button label
 		String textToSet = RUN_BUTTON_LABEL.replaceAll("@ACTION@", "encryption");
-		runButton.setText( textToSet );
+		runButton.setText(textToSet);
 
 	}
 
@@ -111,19 +118,17 @@ public class EncryptionOverviewController {
 	private void handleChooseFile() {
 
 		FileChooser fileChooser = new FileChooser();
-		
-		//if decryption radio button is selected
-		if ( decryptRadioButton.isSelected() ){
-			
-			//add filter to encryption files
-	        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("ENCRYPTION files (*.encryption)", "*.encryption");
-	        fileChooser.getExtensionFilters().add(extFilter);
-			
+
+		// if decryption radio button is selected
+		if (decryptRadioButton.isSelected()) {
+
+			// add filter to encryption files
+			FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("ENCRYPTION files (*.encryption)",
+					"*.encryption");
+			fileChooser.getExtensionFilters().add(extFilter);
+
 		}
 
-
-		
-		
 		file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
 
 		if (file != null) {
@@ -131,8 +136,6 @@ public class EncryptionOverviewController {
 		} else {
 			filePathLabel.setText("No file selected...");
 		}
-
-		System.out.println("Wybrany plik: " + filePathLabel.getText());
 
 	}
 
@@ -151,26 +154,25 @@ public class EncryptionOverviewController {
 
 	@FXML
 	private void handleDecryptRadioButton() {
-		System.out.println("Decrypt button clicked");
+
 		encryptRadioButton.setSelected(false);
 		decryptRadioButton.setSelected(true);
-		
-		//change run button label
+
+		// change run button label
 		String textToSet = RUN_BUTTON_LABEL.replaceAll("@ACTION@", "decryption");
-		runButton.setText( textToSet );
-		
+		runButton.setText(textToSet);
 
 	}
 
 	@FXML
 	private void handleEncryptRadioButton() {
-		System.out.println("Encrypt button clicked");
+
 		decryptRadioButton.setSelected(false);
 		encryptRadioButton.setSelected(true);
-		
-		//change run button label
+
+		// change run button label
 		String textToSet = RUN_BUTTON_LABEL.replaceAll("@ACTION@", "encryption");
-		runButton.setText( textToSet );
+		runButton.setText(textToSet);
 	}
 
 	/**
@@ -191,6 +193,10 @@ public class EncryptionOverviewController {
 
 			// show message
 			Alert alert = new Alert(AlertType.INFORMATION);
+			// add icon
+			Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+			stage.getIcons().add(new Image("file:resources/images/app_icon3.png"));
+
 			alert.setTitle("Password generated!");
 			alert.setHeaderText(null);
 			alert.setContentText(String.format(
@@ -233,34 +239,24 @@ public class EncryptionOverviewController {
 		}
 
 	}
-	
+
 	@FXML
 	public void handleRunButton() {
-		
-		
-		//for test purposes only
-		
-		
-		
-		
-		
 
-		//password
+		// for test purposes only
+
+		// password
 		String password = passwordPasswordField.getText();
-		
-		
-		//filepath
+
+		// filepath
 		String filePath = filePathLabel.getText();
-		
-		
+
 		// generates right file String
 		filePath = filePath.replaceAll("\\\\", "\\\\\\\\");
-		
-		
-		
-		//if password has incorrect length
-		if ( !PasswordUtil.isAESPasswordValidLength( password.length() ) ){
-			
+
+		// if password has incorrect length
+		if (!PasswordUtil.isAESPasswordValidLength(password.length())) {
+
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Something went wrong...");
 			alert.setHeaderText(null);
@@ -270,12 +266,10 @@ public class EncryptionOverviewController {
 			alert.showAndWait();
 			return;
 		}
-		
-		
-		
-		//check if File path label has value "No file spelected"
-		if (filePathLabel.getText().equals("No file selected...")){
-			
+
+		// check if File path label has value "No file spelected"
+		if (filePathLabel.getText().equals("No file selected...")) {
+
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Something went wrong...");
 			alert.setHeaderText(null);
@@ -283,114 +277,42 @@ public class EncryptionOverviewController {
 
 			alert.showAndWait();
 			return;
-			
-		}
-		
-		
-		
-		
-		//if encryption is selected
-		if ( encryptRadioButton.isSelected() ){
 
-			
-			//generate encryption file path
+		}
+
+		// if encryption is selected
+		if (encryptRadioButton.isSelected()) {
+
+			// generate encryption file path
 			String encryptionFilePath = convertFileNameToEncryption(filePath);
-			
-			
-			//create an object
+
+			// create an object
 			EncryptionInfo encryptionInfo = new EncryptionInfo();
 			encryptionInfo.setPassword(password);
 			encryptionInfo.setEncryptingFile(encryptRadioButton.isSelected());
 			encryptionInfo.setInputFilePath(filePath);
-			
+
 			mainApp.showSaveFileWindow(encryptionInfo);
-			
-			
-			
-			
+
 		}
-		//if decryption is selected
-		else{
-			
-			//generate encryption file path
-			//String encryptionFilePath = convertFileNameToDecryption(filePath);
-			
-			
-			//create an object
+		// if decryption is selected
+		else {
+
+			// generate encryption file path
+			// String encryptionFilePath =
+			// convertFileNameToDecryption(filePath);
+
+			// create an object
 			EncryptionInfo encryptionInfo = new EncryptionInfo();
 			encryptionInfo.setPassword(password);
 			encryptionInfo.setEncryptingFile(encryptRadioButton.isSelected());
 			encryptionInfo.setInputFilePath(filePath);
-			
+
 			mainApp.showSaveFileWindow(encryptionInfo);
-			
+
 		}
-		
-		
-		/*
-		//if encryption is selected
-		if ( encryptRadioButton.isSelected() ){
-			
-			String encryptionFilePath = convertFileNameToEncryption(filePath);
-			
-			try {
-				CryptoUtil.encryptFile(password, filePath, encryptionFilePath);
-			} catch (Exception ex) {
-				ex.printStackTrace();
-				StringWriter sw = new StringWriter();
-				PrintWriter pw = new PrintWriter(sw);
-				ex.printStackTrace(pw);
-				String exceptionText = sw.toString();
 
-				System.out.println("Error message: " + ex.getMessage());
-				
-				// show error message
-				// show message
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Something went wrong...");
-				alert.setHeaderText(null);
-				alert.setContentText(ex.getMessage());
-
-				alert.showAndWait();
-			}
-			
-		}
-		//if decryption is selected
-		else{
-			
-			String decryptionFIlePath = convertFileNameToDecryption( filePath );
-			
-			try {
-				CryptoUtil.decryptFile(password, filePath, decryptionFIlePath);
-			} catch (Exception ex) {
-				ex.printStackTrace();
-				StringWriter sw = new StringWriter();
-				PrintWriter pw = new PrintWriter(sw);
-				ex.printStackTrace(pw);
-				String exceptionText = sw.toString();
-
-				System.out.println("Error message: " + ex.getMessage());
-				
-				// show error message
-				// show message
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Something went wrong...");
-				alert.setHeaderText(null);
-				alert.setContentText(ex.getMessage());
-
-				alert.showAndWait();
-			}
-			
-		}
-		
-		
-		
-		*/
-		
 	}
-	
-	
-	
 
 	@FXML
 	public void handlePasswordInput() {
@@ -410,9 +332,5 @@ public class EncryptionOverviewController {
 		passwordLengthLabel.setText(Integer.toString(passwordPasswordField.getLength()));
 
 	}
-	
-	
-
-	
 
 }

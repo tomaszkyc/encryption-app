@@ -88,6 +88,10 @@ public class MainApp extends Application {
 			Scene scene = new Scene(page);
 			saveFileStage.setScene(scene);
 			
+			//add icon
+			saveFileStage.getIcons().add(new Image("file:resources/images/app_icon3.png"));
+
+			
 			SaveFileOverviewController controller = loader.getController();
 			controller.setDialogStage(saveFileStage);
 			controller.setEncryptionInfo(encryptionInfo);

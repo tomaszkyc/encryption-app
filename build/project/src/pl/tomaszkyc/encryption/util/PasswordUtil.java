@@ -26,6 +26,7 @@ public class PasswordUtil {
 			
 			for(int i = 0; i < length; i++){
 				
+				//getting next chars from ASCII table (decimal range: 33 - 126)
 				char sign = (char)(random.nextInt(93) + 33);
 				
 				password.append( sign );
@@ -37,7 +38,7 @@ public class PasswordUtil {
 			throw new Exception("AES password should have 16, 24 or 32 chars length!");
 
 		}
-		System.out.println("Wygenerowane haslo: " + password.toString() );
+
 		return password.toString();
 	}
 
