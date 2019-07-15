@@ -26,7 +26,7 @@ What things you need to install the software and how to install them
 
 ### Installing
 
-1. **Download the setup file** from [here](https://github.com/tomaszkyc/encryption-app/build/deploy/bundles/Encryption-App-1.1.exe)
+1. **Download the setup file** from [here](https://github.com/tomaszkyc/encryption-app/raw/master/build/deploy/bundles/Encryption-App-1.1.exe)
 
 
 2. Run the setup as below:
